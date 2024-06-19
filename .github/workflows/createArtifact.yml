@@ -115,7 +115,8 @@ jobs:
       with:
        context: .
        push: true
-       tags: bhushanmisal531/hello-world/:0.0.1.RELESE
+       tags: 
+         bhushanmisal531/hello-world:0.0.1.RELESE
             
           
 
