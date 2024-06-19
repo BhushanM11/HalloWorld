@@ -91,7 +91,7 @@ jobs:
         tags: bhushanmisal531/hello-world:0.0.1.RELESE
         run: |
           docker login -u {DOCKER_USERNAME}
-          ${DOCKER_HUB_ACCESS_TOKEN}
+          dckr_pat_g2Iejlm8cF_XB7KPVFJJ-36ts3I
         # username: ${DOCKER_USERNAME}
         # password: ${DOCKER_HUB_ACCESS_TOKEN}
     # - name: Build and push Docker image
