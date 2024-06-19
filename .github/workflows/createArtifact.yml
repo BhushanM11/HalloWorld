@@ -89,9 +89,10 @@ jobs:
         context: .
         push: true
         tags: bhushanmisal531/hello-world:0.0.1.RELESE
-        env: |
-          DOCKER_HUB_USERNAME
-          DOCKER_HUB_ACCESS_TOKEN
+          docker login -u {DOCKER_USERNAME}
+          ${DOCKER_HUB_ACCESS_TOKEN}
+        # username: ${DOCKER_USERNAME}
+        # password: ${DOCKER_HUB_ACCESS_TOKEN}
     # - name: Build and push Docker image
     #   uses: docker/build-push-action@v2
     #   with:
