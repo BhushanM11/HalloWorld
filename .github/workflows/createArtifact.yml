@@ -1,3 +1,32 @@
+# name: Python application
+
+# on:
+#   push:
+#     branches: [ main ]
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - uses: actions/checkout@v2
+
+#     - name: Set up Python 3.8
+#       uses: actions/setup-python@v2
+#       with:
+#         python-version: 3.8
+
+#     - name: Install dependencies
+#       run: |
+#         python -m pip install --upgrade pip
+#         pip install -r requirements.txt
+
+
+#     - name: Archive production artifacts
+#       uses: actions/upload-artifact@v2
+#       with:
+#         name: app # Change this to whatever you prefer
+#         path: . # Archive the entire project directory
 name: Python application
 
 on:
@@ -21,9 +50,31 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: app # Change this to whatever you prefer
+        name: app
         path: . # Archive the entire project directory
+
+  docker:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: app
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: bhushanmisal531/hello-world:0.0.1.RELESE
+        secrets: |
+          DOCKER_HUB_USERNAME=${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_ACCESS_TOKEN=${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
